@@ -1,8 +1,8 @@
 interface Payable {
-    public void getPayableAmount();
+    void getPayableAmount();
 }
 
-abstract class Employee implements Payable{
+abstract class Employee {
     String name;
     int id;
     double baseSalary;
@@ -22,7 +22,7 @@ abstract class Employee implements Payable{
     }
 }
 
-class FullTimeEmployee extends Employee{
+class FullTimeEmployee extends Employee implements Payable {
     public FullTimeEmployee(String name, int id, double baseSalary) {
         super(name, id, baseSalary, true);
     }
@@ -31,12 +31,14 @@ class FullTimeEmployee extends Employee{
     public double calculateSalary() {
         return baseSalary * 1.2;
     }
+
     @Override
     public void getPayableAmount() {
         System.out.println("Total Salary: $" + calculateSalary());
     }
 }
-class ContractEmployee extends Employee{
+
+class ContractEmployee extends Employee implements Payable {
     private double hourlyRate;
     private int hoursWorked;
 
@@ -59,19 +61,14 @@ class ContractEmployee extends Employee{
 
 public class Employee_Management_System {
     public static void main(String[] args) {
-    Employee fullTimeEmp = new FullTimeEmployee("Alice", 101, 5000);
-    Employee contractorEmp = new ContractEmployee("Mary", 102, 5000, 1);
-    fullTimeEmp.displayEmployeeInfo();
-    fullTimeEmp.getPayableAmount();
+        FullTimeEmployee fullTimeEmp = new FullTimeEmployee("Zarylbek", 101, 5000);
+        ContractEmployee contractorEmp = new ContractEmployee("Maarryy", 102, 5000, 1);
 
-    System.out.println();
-    contractorEmp.displayEmployeeInfo();
-    contractorEmp.getPayableAmount();
+        fullTimeEmp.displayEmployeeInfo();
+        fullTimeEmp.getPayableAmount();
 
-
-
-
-}
-
-
+        System.out.println();
+        contractorEmp.displayEmployeeInfo();
+        contractorEmp.getPayableAmount();
+    }
 }
